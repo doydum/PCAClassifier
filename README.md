@@ -7,6 +7,8 @@ A new data point in feature space can be classified by measuring its proximity t
 
 ### Classification based on proximity to centroids
 
+![Classification based on proximity to centroids](/assets/images/Classification-Centroid.png)
+
 To implement classification based on proximity in Python, we first need to compute group-related statistics:
 
 ```python
