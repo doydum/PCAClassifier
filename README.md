@@ -44,6 +44,8 @@ If the class groups exhibit elongated patterns, the variances and directions in 
 
 ### Classification based on proximity to first principal components
 
+![Classification based on proximity to first principal components](/assets/images/Classification-PCA.png)
+
 Classification based on proximity to first principal components could be implemented by:
 ```python
 distances = dict()
