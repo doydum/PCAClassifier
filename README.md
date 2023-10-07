@@ -1,9 +1,12 @@
-##Classification Using Principal Components Analysis (PCA)
-####Identify classes by proximity to first eigen vectors.
+H2 Classification Using Principal Components Analysis (PCA)
+H4 Identify classes by proximity to first eigen vectors.
 
 Principal Components Analysis (PCA) is a statistical technique commonly used in data science to reduce dimensionality in feature sets. There are excellent Towards Data Science articles dedicated to the conceptual explanation and use of PCA in feature selection (1) (2). The goal of this article is to develop an algorithm where PCA is used in Machine Learning classification problems.
 
 A new data point in feature space can be classified by measuring its proximity to the centroids of class groups. 
+
+![](file:///C:/Users/cdoyd/Documents/Classification-Centroid.png)
+
 Classification based on proximity to centroidsTo implement classification based on proximity in Python, we first need to compute group-related statistics:
 
 ```python
@@ -36,6 +39,9 @@ def classifier_by_centroid(new_data):
   return result
 ```
 If the class groups exhibit elongated patterns, the variances and directions in these patterns could be robustly captured by the PCA eigen values and vectors. The proximity to the component axes defined by the first eigen vectors could be used for classification purposes.
+
+![](file:///C:/Users/cdoyd/Documents/Classification-PCA.png)
+
 Classification based on proximity to first principal componentsClassification based on proximity to first principal components could be implemented by:
 ```python
 distances = dict()
