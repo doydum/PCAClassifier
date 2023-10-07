@@ -1,14 +1,12 @@
-Classification Using Principal Components Analysis (PCA)
-Identify classes by proximity to first eigen vectors.
-
----
+##Classification Using Principal Components Analysis (PCA)
+####Identify classes by proximity to first eigen vectors.
 
 Principal Components Analysis (PCA) is a statistical technique commonly used in data science to reduce dimensionality in feature sets. There are excellent Towards Data Science articles dedicated to the conceptual explanation and use of PCA in feature selection (1) (2). The goal of this article is to develop an algorithm where PCA is used in Machine Learning classification problems.
 
----
-
 A new data point in feature space can be classified by measuring its proximity to the centroids of class groups. 
 Classification based on proximity to centroidsTo implement classification based on proximity in Python, we first need to compute group-related statistics:
+
+```python
 # first, compute statistics about class groups
 groups = dict()
 group_list= ["green", "orange"]
@@ -21,7 +19,9 @@ for g in groups:
   groups[g]['pca_fit'] = PCA(n_components=n_components).fit(groups[g]['df'])
   groups[g]['std'] = np.sqrt(groups[g]['pca_fit'].explained_variance_)
   groups[g]['mean'] = groups[g]['pca_fit'].mean_
+```
 Classification based on proximity to centroids could be implemented by:
+```python
 def classifier_by_centroid(new_data):
   # calculates distances to centroids
   distances = [np.linalg.norm(new_data - groups[g]['mean']) for g in classes]
@@ -34,8 +34,10 @@ def classifier_by_centroid(new_data):
       dist_min = d   
       result = g
   return result
+```
 If the class groups exhibit elongated patterns, the variances and directions in these patterns could be robustly captured by the PCA eigen values and vectors. The proximity to the component axes defined by the first eigen vectors could be used for classification purposes.
 Classification based on proximity to first principal componentsClassification based on proximity to first principal components could be implemented by:
+```python
 distances = dict()
 group_df = pd.DataFrame(NewData)
 
@@ -51,7 +53,9 @@ for d in distances:
   if dis < dist_min:
     dist_min = dis
     result = d
+```
 Since an elongated group shape is a prerequisite for the applicability of the current PCA-based classification algorithm, a criterion is needed for determining if a group cluster is sufficiently elongated. The subject of "unidimensionality" is investigated in the field of Psychology and a ratio of greater than 3 to 5 between the first and second eigen values is generally accepted as existence of elongation (3).
+```python
 # ratio_max must be larger than a threshold value, like 3.
 # if so, select feature_set_max as the best feature set.
 feature_set_max = ''
@@ -63,6 +67,7 @@ for fs in feature_sets:
     if ev_ratio > ratio_max:
       ratio_max = ev_ratio
       feature_set_max = fs
+```
 The last consideration in the development of the algorithm is the selection of the feature set which exhibit the largest elongation, that is the maximum ratio between the first and second eigen values. An alternative approach where the number of features and data points are very large would be run the algorithm against an exhaustive list of feature sets and select the feature set that return the highest accuracy.
 
 ---
