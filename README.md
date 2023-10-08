@@ -66,17 +66,9 @@ for d in distances:
 ```
 Since an elongated group shape is a prerequisite for the applicability of the current PCA-based classification algorithm, a criterion is needed for determining if a group cluster is sufficiently elongated. The subject of "unidimensionality" is investigated in the field of Psychology and a ratio of greater than 3 to 5 between the first and second eigen values is generally accepted as existence of elongation (3).
 ```python
-# ratio_max must be larger than a threshold value, like 3.
-# if so, select feature_set_max as the best feature set.
-feature_set_max = ''
-ratio_max = -np.inf
-for fs in feature_sets:
-  for g in group_list:
-    evs = groups[g]['pca_fit'].explained_variance_
-    ev_ratio = evs[0]/evs[1] # ratio of 1st eigen value to 2nd eigen value
-    if ev_ratio > ratio_max:
-      ratio_max = ev_ratio
-      feature_set_max = fs
+# all ratios in ratio_maxs must be larger than a threshold value, like 3.
+
+ratio_maxs = [ groups[g]['std'][0]/groups[g]['std'][1] for g in classes ]
 ```
 The last consideration in the development of the algorithm is the selection of the feature set which exhibit the largest elongation, that is the maximum ratio between the first and second eigen values. An alternative approach where the number of features and data points are very large would be run the algorithm against an exhaustive list of feature sets and select the feature set that return the highest accuracy.
 
