@@ -48,7 +48,7 @@ def classifier_by_pca(data):
 
   return  res_strong if res_strong!='' else res_weak
 
-###################################################
+#### Demonstration with toy dataset ####
 
 df = pd.DataFrame([ [6.1,3.0,'G'],
                     [6.05,2.1,'G'],
@@ -84,4 +84,3 @@ print(classifier_by_pca(data_std))
 # all ratios in ratio_maxs must be larger than a threshold value, like 3.
 ratio_maxs = [ groups[g]['std'][0]/groups[g]['std'][1] for g in classes ]
 print(ratio_maxs)
-# %%
