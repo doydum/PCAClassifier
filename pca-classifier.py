@@ -78,7 +78,9 @@ for g in classes:
 data = pd.DataFrame([[6.2, 3.8]], columns=features)
 data_std = scaler.transform(data)
 
-print(classifier_by_pca(data_std))
 print(classifier_by_centroid(data_std))
+print(classifier_by_pca(data_std))
 
+# all ratios in ratio_maxs must be larger than a threshold value, like 3.
+ratio_maxs = [ groups[g]['std'][0]/groups[g]['std'][1] for g in classes ]
 # %%
