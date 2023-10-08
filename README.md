@@ -25,7 +25,9 @@ for g in groups:
   groups[g]['std'] = np.sqrt(groups[g]['pca_fit'].explained_variance_)
   groups[g]['mean'] = groups[g]['pca_fit'].mean_
 ```
+
 Classification based on proximity to centroids could be implemented by:
+
 ```python
 def classifier_by_centroid(new_data):
   # calculates distances to centroids
@@ -40,6 +42,7 @@ def classifier_by_centroid(new_data):
       result = g
   return result
 ```
+
 If the class groups exhibit elongated patterns, the variances and directions in these patterns could be robustly captured by the PCA eigen values and vectors. The proximity to the component axes defined by the first eigen vectors could be used for classification purposes.
 
 ### Classification based on proximity to first principal components
@@ -47,6 +50,7 @@ If the class groups exhibit elongated patterns, the variances and directions in 
 ![Classification based on proximity to first principal components](/assets/images/Classification-PCA.png)
 
 Classification based on proximity to first principal components could be implemented by:
+
 ```python
 distances = dict()
 group_df = pd.DataFrame(NewData)
@@ -64,13 +68,16 @@ for d in distances:
     dist_min = dis
     result = d
 ```
+
 Since an elongated group shape is a prerequisite for the applicability of the current PCA-based classification algorithm, a criterion is needed for determining if a group cluster is sufficiently elongated. The subject of "unidimensionality" is investigated in the field of Psychology and a ratio of greater than 3 to 5 between the first and second eigen values is generally accepted as existence of elongation (3).
+
 ```python
 # all ratios in ratio_maxs must be larger than a threshold value, like 3.
 
 ratio_maxs = [ groups[g]['std'][0]/groups[g]['std'][1] for g in classes ]
 ```
-The last consideration in the development of the algorithm is the selection of the feature set which exhibit the largest elongation, that is the maximum ratio between the first and second eigen values. An alternative approach where the number of features and data points are very large would be run the algorithm against an exhaustive list of feature sets and select the feature set that return the highest accuracy.
+
+The last consideration in the development of the algorithm is the selection of the feature set which exhibits the largest elongation, that is the maximum ratio between the first and second eigen values. An alternative approach where the number of features and data points are very large would be run the algorithm against an exhaustive list of feature sets and select the feature set that return the highest accuracy.
 
 ---
 
@@ -79,6 +86,6 @@ A computationally performant method is introduced in this article that effective
 ---
 
 References:
-1. Principal Component Analysis (PCA) Explained as Simple as Possible
-2. Dimensionality Reduction (PCA) Explained
-3. A Note on Using Eigenvalues in Dimensionality Assessment
+1. [Principal Component Analysis (PCA) Explained as Simple as Possible](https://medium.com/@mattisonhineline/principal-component-analysis-pca-explained-as-simple-as-possible-896fd8dee9c)
+2. [Dimensionality Reduction (PCA) Explained](https://towardsdatascience.com/dimensionality-reduction-explained-5ae45ae3058e)
+3. [A Note on Using Eigenvalues in Dimensionality Assessment](https://scholarworks.umass.edu/cgi/viewcontent.cgi?article=1358&context=pare#:~:text=Parallel%20analysis%20determines%20the%20number,thus%20define%20a%20valid%20dimension.)
