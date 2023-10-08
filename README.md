@@ -74,7 +74,7 @@ The last consideration in the development of the algorithm is the selection of t
 
 ---
 
-A computationally performant method is introduced in this article that effectively identifies the classes of new data points. The down side with his novel ML algorithm is that it can be used only with data sets that exhibit elongated class group structures. The feature sets that can provide the necessary elongation can be identified by investigation of the ratios between the first and second eigen values.
+A computationally performant method is introduced in this article that effectively identifies the classes of new data points. The negative aspect of this novel ML algorithm is that it can be used only with data sets that exhibit elongated class group structures. The feature sets that can provide the necessary elongation can be identified by investigation of the ratios between the first and second eigen values.
 
 ---
 
